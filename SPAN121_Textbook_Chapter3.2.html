@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spanish 121 · Capítulo 3.2 · Semana 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243561;
+    --terracotta: #c4522a;
+    --terra-light: #e07048;
+    --gold: #d4a537;
+    --gold-light: #f0c45a;
+    --cream: #fdf6ec;
+    --cream-dark: #f4e8d4;
+    --sage: #5a7a5e;
+    --sage-light: #7ba080;
+    --text: #2a1f14;
+    --text-light: #6b5a45;
+    --correct: #2d6e3e;
+    --wrong: #9e2a2a;
+    --correct-bg: #e8f5ec;
+    --wrong-bg: #fde8e8;
+    --tile-shadow: 0 4px 20px rgba(26,39,68,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background-color: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header-badge {
+    background: var(--terracotta);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    flex: 1;
+  }
+
+  .header-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── NAV TABS ───────────────────────────── */
+  nav {
+    background: var(--navy-light);
+    border-bottom: 3px solid var(--gold);
+    overflow-x: auto;
+  }
+
+  .nav-inner {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  nav button:hover { color: white; }
+  nav button.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+  }
+
+  /* ── MAIN ───────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  section { display: none; }
+  section.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── WEEK OVERVIEW ──────────────────────── */
+  .week-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #2d4a7a 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .week-hero::before {
+    content: '3.2';
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .week-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .week-hero p {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+  }
+
+  .topic-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Schedule table */
+  .schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--tile-shadow);
+    margin-bottom: 32px;
+  }
+
+  .schedule-table thead {
+    background: var(--navy);
+    color: white;
+  }
+
+  .schedule-table th {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  .schedule-table tbody tr:nth-child(even) { background: var(--cream-dark); }
+  .schedule-table tbody tr:nth-child(odd) { background: white; }
+  .schedule-table tbody tr:hover { background: #efe4d4; transition: background 0.2s; }
+
+  .schedule-table td {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+
+  .day-type {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  .type-inclass { background: var(--navy); color: white; }
+  .type-self { background: var(--sage); color: white; }
+  .type-practice { background: var(--terracotta); color: white; }
+
+  .day-focus { font-weight: 600; color: var(--navy); }
+  .hw-note { font-style: italic; color: var(--text-light); font-size: 0.85rem; }
+
+  /* ── SECTION TITLES ─────────────────────── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+    border-left: 5px solid var(--terracotta);
+    padding-left: 16px;
+  }
+
+  .section-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-left: 21px;
+  }
+
+  /* ── GRAMMAR BOXES ──────────────────────── */
+  .grammar-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--tile-shadow);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .grammar-header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .grammar-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--terracotta);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .grammar-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .grammar-body { padding: 24px; }
+  .grammar-body p { margin-bottom: 14px; font-size: 0.95rem; }
+
+  .pronoun-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+
+  .pronoun-table th {
+    background: var(--cream-dark);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .pronoun-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  .pronoun-table .sp { font-style: italic; color: var(--navy); font-weight: 600; }
+  .pronoun-table .en { color: var(--text-light); }
+  .pronoun-table tr.highlight { background: #fffaf0; }
+  .pronoun-table .stem-change { color: var(--terracotta); font-weight: 700; font-style: normal; }
+
+  .example-block {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+
+  .example-block p { margin: 4px 0; font-size: 0.9rem; }
+
+  .example-block .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px !important;
+  }
+
+  .example-block .es { font-style: italic; color: var(--navy); }
+  .example-block .en { color: var(--text-light); font-size: 0.82rem; }
+
+  /* ── EXERCISES ──────────────────────────── */
+  .exercise-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--tile-shadow);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .exercise-header {
+    background: var(--terracotta);
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .exercise-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+  }
+
+  .exercise-header .ex-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .exercise-body { padding: 24px; }
+
+  .exercise-body .instructions {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--cream-dark);
+    padding-bottom: 14px;
+  }
+
+  .exercise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--cream);
+    transition: background 0.2s;
+  }
+
+  .exercise-item.correct { background: var(--correct-bg); }
+  .exercise-item.wrong { background: var(--wrong-bg); }
+
+  .item-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    min-width: 22px;
+    margin-top: 2px;
+  }
+
+  .item-text { flex: 1; }
+  .item-text p { font-size: 0.92rem; margin-bottom: 8px; }
+
+  .fill-sentence {
+    font-size: 0.92rem;
+    line-height: 2.2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .blank-input {
+    background: white;
+    border: none;
+    border-bottom: 2px solid var(--navy);
+    padding: 2px 8px;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--navy);
+    min-width: 130px;
+    width: auto;
+    transition: border-color 0.2s;
+  }
+
+  .blank-input:focus { outline: none; border-bottom-color: var(--gold); }
+  .blank-input.correct-input { border-bottom-color: var(--correct); color: var(--correct); }
+  .blank-input.wrong-input { border-bottom-color: var(--wrong); color: var(--wrong); }
+
+  .feedback {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .feedback.show { display: block; }
+  .feedback.correct { color: var(--correct); }
+  .feedback.wrong { color: var(--wrong); }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--cream-dark);
+  }
+
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-check { background: var(--navy); color: white; }
+  .btn-check:hover { background: var(--navy-light); transform: translateY(-1px); }
+  .btn-reset { background: var(--cream-dark); color: var(--text); }
+  .btn-reset:hover { background: #e0d0b8; }
+
+  .score-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-left: auto;
+    display: none;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .score-badge.show { display: flex; }
+  .score-badge.good { background: var(--correct-bg); color: var(--correct); }
+  .score-badge.ok { background: #fff3cd; color: #856404; }
+  .score-badge.retry { background: var(--wrong-bg); color: var(--wrong); }
+
+  /* word bank */
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 14px;
+    background: var(--cream);
+    border-radius: 8px;
+    border: 1px dashed var(--cream-dark);
+  }
+
+  .word-bank-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .word-chip {
+    background: white;
+    border: 1px solid var(--cream-dark);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--navy);
+  }
+
+  /* ── CONJUGATION TABLE EXERCISE ─────────── */
+  .conj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .conj-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+
+  .conj-row.given { background: var(--cream-dark); }
+  .conj-row.given .conj-preset { font-style: italic; color: var(--navy); font-weight: 600; font-size: 0.9rem; }
+
+  .conj-pronoun {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    min-width: 90px;
+  }
+
+  .conj-input {
+    flex: 1;
+    border: none;
+    border-bottom: 2px solid var(--navy);
+    background: transparent;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--navy);
+    padding: 2px 4px;
+  }
+
+  .conj-input:focus { outline: none; border-bottom-color: var(--gold); }
+  .conj-input.correct-input { border-bottom-color: var(--correct); color: var(--correct); }
+  .conj-input.wrong-input { border-bottom-color: var(--wrong); color: var(--wrong); }
+
+  .conj-verb-header {
+    background: var(--navy);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .conj-section { margin-bottom: 24px; }
+
+  /* ── CULTURAL NOTE ──────────────────────── */
+  .cultural-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--tile-shadow);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .cultural-header {
+    background: linear-gradient(90deg, var(--sage) 0%, var(--sage-light) 100%);
+    color: white;
+    padding: 16px 24px;
+  }
+
+  .cultural-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+  }
+
+  .cultural-body {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 640px) { .cultural-body { grid-template-columns: 1fr; } }
+
+  .fact-card {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .fact-card .fact-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .fact-card h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .fact-card p { font-size: 0.88rem; }
+
+  /* ── VIDEO LOG ──────────────────────────── */
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--cream);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .checklist-item:hover { background: var(--cream-dark); }
+
+  .checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--sage);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 0.92rem;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.done label {
+    text-decoration: line-through;
+    color: var(--text-light);
+  }
+
+  .vl-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    background: var(--navy);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+  }
+
+  .script-area {
+    width: 100%;
+    border: 2px solid var(--cream-dark);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.92rem;
+    color: var(--navy);
+    resize: vertical;
+    min-height: 200px;
+    margin-top: 12px;
+    transition: border-color 0.2s;
+    background: white;
+  }
+
+  .script-area:focus { outline: none; border-color: var(--gold); }
+
+  .progress-bar-wrap {
+    background: var(--cream-dark);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+    margin: 6px 0 4px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--sage), var(--sage-light));
+    transition: width 0.5s ease;
+  }
+
+  .vl-step {
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--tile-shadow);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .vl-step-num {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .vl-step-body h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+  .vl-step-body p { font-size: 0.9rem; margin-bottom: 8px; }
+  .vl-step-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 600px) {
+    .header-inner { padding: 12px 16px; gap: 10px; }
+    main { padding: 24px 16px 60px; }
+    .week-hero { padding: 24px 20px; }
+    .week-hero h1 { font-size: 1.5rem; }
+    .grammar-body { padding: 16px; }
+    .exercise-body { padding: 16px; }
+    .conj-grid { grid-template-columns: 1fr; }
+  }
+
+  /* connector chips */
+  .connector-chip {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 2px 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* learning objectives list */
+  .obj-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .obj-item {
+    background: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    box-shadow: var(--tile-shadow);
+    border-left: 4px solid var(--gold);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .obj-item::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.7rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  /* three-way contrast (porque/para/por) */
+  .three-way {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 14px 0;
+  }
+  @media (max-width: 700px) { .three-way { grid-template-columns: 1fr; } }
+  .way-card {
+    background: var(--cream);
+    border-top: 4px solid var(--terracotta);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .way-card.alt-1 { border-top-color: var(--navy); }
+  .way-card.alt-2 { border-top-color: var(--gold); }
+  .way-card.alt-3 { border-top-color: var(--terracotta); }
+  .way-card .way-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .way-card .way-rule {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .way-card .way-ex { font-size: 0.85rem; font-style: italic; color: var(--navy); margin-bottom: 4px; }
+
+  /* boot verb visual */
+  .boot-wrap { display: flex; justify-content: center; margin: 18px 0; }
+  .boot {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 14px;
+    background: #fef5e0;
+    border: 3px solid var(--gold);
+    border-radius: 28px 28px 28px 60px;
+    box-shadow: var(--tile-shadow);
+  }
+  .boot-cell {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    text-align: center;
+    min-width: 110px;
+    color: var(--navy);
+  }
+  .boot-cell.outside {
+    background: #f4e8d4;
+    color: var(--text-light);
+    border: 1px dashed var(--text-light);
+  }
+  .boot-cell .stem-change { color: var(--terracotta); font-weight: 700; }
+  .boot-caption {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="header-badge">SPSCC · ESP 121</span>
+    <span class="header-title">Capítulo 3 — Mi Vida</span>
+    <span class="header-subtitle">Semana 7 · Week 7</span>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="active" onclick="showSection('overview', this)">📋 Overview</button>
+    <button onclick="showSection('gramatica', this)">📐 Gramática</button>
+    <button onclick="showSection('ejercicios', this)">✏️ Ejercicios</button>
+    <button onclick="showSection('cultura', this)">🌎 Cultura</button>
+    <button onclick="showSection('videolog', this)">🎥 Video Log 3</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════ OVERVIEW -->
+<section id="overview" class="active">
+  <div class="week-hero">
+    <h1>Capítulo 3.2 — Querer es poder</h1>
+    <p>SPSCC · Spanish 121 · Stem-changing verbs, irregular yo, and the porque / para / por trio</p>
+    <div class="topic-chips">
+      <span class="chip">verbos e → ie</span>
+      <span class="chip">yo irregular</span>
+      <span class="chip">porque / para / por</span>
+      <span class="chip">querer + infinitivo</span>
+      <span class="chip">Paraguay y el guaraní</span>
+      <span class="chip">Video Log 3: solicitud</span>
+    </div>
+  </div>
+
+  <!-- Chapter intro card -->
+  <div style="background:linear-gradient(135deg, var(--navy), var(--navy-light));color:white;padding:24px 28px;border-radius:14px;margin-bottom:32px;box-shadow:var(--tile-shadow)">
+    <div style="font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;margin-bottom:8px">Capítulo 3 · Segunda parte</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:10px;color:white">Closing the Chapter</h2>
+    <p style="font-size:0.95rem;line-height:1.55;opacity:0.95">Week 7 brings together everything you need to express <strong>goals, plans, and reasons</strong>. You'll meet stem-changing verbs that bend in a boot-shaped pattern, the eight irregular <em>yo</em> forms you'll use every day, and the famously tricky <em>porque / para / por</em> distinction. The chapter closes with <strong>Video Log 3</strong> — a 2–3 minute formal application addressed to a hiring manager or program coordinator.</p>
+  </div>
+
+  <!-- Learning Objectives -->
+  <h2 class="section-title">Learning Objectives — Semana 7</h2>
+  <p class="section-meta">By the end of this week you will be able to:</p>
+  <div class="obj-list">
+    <div class="obj-item"><span>Conjugate <em>e → ie</em> stem-changing verbs and recognize the "boot" pattern</span></div>
+    <div class="obj-item"><span>Use <em>querer + infinitive</em> to express goals, plans, and desires</span></div>
+    <div class="obj-item"><span>Produce the eight common irregular yo forms: <em>hago, sé, conozco, pongo, salgo, traigo, digo, vengo</em></span></div>
+    <div class="obj-item"><span>Distinguish <em>porque</em>, <em>para</em>, and <em>por</em> in context</span></div>
+    <div class="obj-item"><span>Describe motivation and purpose in a formal application</span></div>
+    <div class="obj-item"><span>Recognize Paraguay as Latin America's officially bilingual country and the role of guaraní</span></div>
+    <div class="obj-item"><span>Record a 2–3 minute formal Video Log applying to a job or program</span></div>
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--text-light);font-style:italic;margin-bottom:24px">📍 This page covers <strong>Week 7 (Semana 7)</strong> — the second week of Capítulo 3. Family vocabulary, possessives, and <em>saber</em>/<em>conocer</em> were introduced in Week 6 and are reactivated here for the Video Log.</p>
+
+  <!-- Weekly Schedule -->
+  <h2 class="section-title">Weekly Schedule</h2>
+  <p class="section-meta">4 days · 4 focuses · Semana 7</p>
+
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        <th>Type</th>
+        <th>Focus</th>
+        <th>Activities</th>
+        <th>Homework</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Weekend</strong><br><small style="color:var(--text-light);font-family:'Space Mono',monospace;font-size:0.65rem">Fin de semana</small></td>
+        <td><span class="day-type type-self">Self-Guided</span></td>
+        <td class="day-focus">Grammar 1 — e → ie Verbs</td>
+        <td>Read Grammar 1 (e → ie stem-changing verbs); complete Ejercicio 4A (tables) independently; highlight the stem in each changed form</td>
+        <td class="hw-note">Ejercicio 4A due Monday; write 5 sentences using <em>querer</em> + infinitive</td>
+      </tr>
+      <tr>
+        <td><strong>Monday</strong><br><small style="color:var(--text-light);font-family:'Space Mono',monospace;font-size:0.65rem">Lunes</small></td>
+        <td><span class="day-type type-inclass">In-Class</span></td>
+        <td class="day-focus">e → ie Verbs + Irregular YO</td>
+        <td>e → ie drill and games; Grammar 2 instruction (irregular yo); Ejercicio 4B (context fill-in); Ejercicio 5 (yo fill-in)</td>
+        <td class="hw-note">Finish Ejercicio 5; create a chart of 8 irregular yo verbs with example sentences</td>
+      </tr>
+      <tr>
+        <td><strong>Tuesday</strong><br><small style="color:var(--text-light);font-family:'Space Mono',monospace;font-size:0.65rem">Martes</small></td>
+        <td><span class="day-type type-practice">Practice</span></td>
+        <td class="day-focus">porque / para / por + Email Draft</td>
+        <td>Grammar 3 instruction (porque/para/por); Ejercicio 6 (choose the correct word); begin formal email draft</td>
+        <td class="hw-note">Finish Ejercicio 6; complete email draft; peer checklist review</td>
+      </tr>
+      <tr>
+        <td><strong>Wednesday</strong><br><small style="color:var(--text-light);font-family:'Space Mono',monospace;font-size:0.65rem">Miércoles</small></td>
+        <td><span class="day-type type-inclass">In-Class</span></td>
+        <td class="day-focus">Video Log Workshop + Oral Survey</td>
+        <td>Submit Video Log 3; oral class interview activity; video log presentations; Chapter 3 wrap-up</td>
+        <td class="hw-note">Begin Ch. 4 vocabulary preview over the weekend</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Monday class plan -->
+  <h2 class="section-title">Monday In-Class Plan</h2>
+  <p class="section-meta">Lunes · En clase · 50 minutes</p>
+
+  <div style="display:grid;gap:12px;margin-bottom:32px;">
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--gold)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--gold);min-width:70px">0:00–0:05</div>
+      <div class="item-text"><strong>Warm-Up:</strong> <em>Saber / conocer</em> chain drill — instructor says a sentence context, students call out the correct verb. Quick oral confirmation.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--terracotta)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--terracotta);min-width:70px">0:05–0:20</div>
+      <div class="item-text"><strong>e → ie Drill and Board Games:</strong> Instructor writes a verb stem on the board; pairs race to write all five changed forms. Then the "boot verb" visual — draw the boot shape around the stem-changing forms. Students identify which forms sit inside the boot.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--navy)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--navy);min-width:70px">0:20–0:35</div>
+      <div class="item-text"><strong>Irregular YO Partner Share — "Yo… ¿Y tú?":</strong> Each student makes 3 sentences using irregular yo forms (<em>hago, sé, conozco, pongo, salgo, traigo</em>). Partner responds with their own. One pair shares an exchange with the class.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--sage)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--sage);min-width:70px">0:35–0:45</div>
+      <div class="item-text"><strong>Ejercicios 4B + 5 as a Class:</strong> Complete fill-in items together; instructor elicits answers and addresses common errors. Students correct their own work.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--gold)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--gold);min-width:70px">0:45–0:50</div>
+      <div class="item-text"><strong>Exit Ticket:</strong> Each student writes one sentence using <em>querer</em> + infinitive describing a goal for the week.</div>
+    </div>
+  </div>
+
+  <!-- Wednesday plan -->
+  <h2 class="section-title">Wednesday In-Class Plan</h2>
+  <p class="section-meta">Miércoles · En clase · 50 minutes</p>
+
+  <div style="display:grid;gap:12px;margin-bottom:32px;">
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--terracotta)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--terracotta);min-width:70px">0:00–0:05</div>
+      <div class="item-text"><strong>Submit Video Log 3:</strong> Upload the job-application video log to the class platform.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--navy)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--navy);min-width:70px">0:10–0:30</div>
+      <div class="item-text"><strong>Hot Seat Oral Activity:</strong> One volunteer sits at the front. Classmates ask questions — <em>¿Adónde quieres ir? ¿Qué sabes hacer? ¿Conoces a alguien en ese campo?</em> The volunteer answers using Ch. 3 structures. Rotate 2–3 volunteers.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--sage)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--sage);min-width:70px">0:30–0:45</div>
+      <div class="item-text"><strong>Video Log Presentations:</strong> Pairs share their video log goals in Spanish — <em>"Quiero trabajar en ___ porque ___. Para conseguir ese trabajo, ___."</em> Partner gives one piece of feedback.</div>
+    </div>
+    <div class="exercise-item" style="background:white;border-left:4px solid var(--gold)">
+      <div class="item-num" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--gold);min-width:70px">0:45–0:50</div>
+      <div class="item-text"><strong>Ch. 3 Wrap-Up:</strong> Class reviews <em>porque / para / por</em> distinctions with 3 quick examples. Preview Ch. 4 campus vocabulary for the weekend.</div>
+    </div>
+  </div>
+
+  <!-- Online Resources -->
+  <h2 class="section-title">Online Resources</h2>
+  <p class="section-meta">Semana 7 · Outside Materials</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:16px">
+    <div style="background:white;border-radius:10px;padding:18px;box-shadow:var(--tile-shadow)">
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Weekend · Self-Guided</div>
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:8px">Verbos con cambio e → ie</p>
+      <a href="https://www.youtube.com/watch?v=PUjnwoUrCG8" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none;margin-bottom:4px">▶ Video: Stem-Changing Verbs e → ie</a>
+      <a href="https://studyspanish.com/grammar/test/stemie" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none">📝 Practice: e → ie Stem-Changing (StudySpanish)</a>
+    </div>
+    <div style="background:white;border-radius:10px;padding:18px;box-shadow:var(--tile-shadow)">
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Monday</div>
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:8px">Formas irregulares de YO</p>
+      <a href="https://www.youtube.com/watch?v=l0rOmomHSxg" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none;margin-bottom:4px">▶ Video: Irregular YO Forms in Spanish</a>
+      <a href="https://studyspanish.com/grammar/test/irregfirst" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none">📝 Practice: Irregular YO Verb Practice</a>
+    </div>
+    <div style="background:white;border-radius:10px;padding:18px;box-shadow:var(--tile-shadow)">
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Tuesday · Practice</div>
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:8px">Porque / Para / Por</p>
+      <a href="https://www.youtube.com/watch?v=02Am4LlPGjU" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none;margin-bottom:4px">▶ Video: Por vs. Para — When to Use Each</a>
+      <a href="https://studyspanish.com/grammar/test/porpara" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none">📝 Practice: Por vs. Para Interactive</a>
+    </div>
+    <div style="background:white;border-radius:10px;padding:18px;box-shadow:var(--tile-shadow)">
+      <div style="font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Wednesday</div>
+      <p style="font-size:0.88rem;font-weight:600;margin-bottom:8px">Video Log 3 Workshop</p>
+      <a href="https://www.youtube.com/@spanishpod101/search?query=formal+email+Spanish" target="_blank" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none;margin-bottom:4px">▶ Video: Writing a Formal Email (SpanishPod101)</a>
+      <a href="#" onclick="showSection('videolog', document.querySelectorAll('nav button')[4]);return false;" style="display:block;font-size:0.8rem;color:var(--navy);text-decoration:none">📝 Practice: Draft your Video Log 3 script ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ GRAMÁTICA -->
+<section id="gramatica">
+  <h2 class="section-title">Gramática — Grammar Notes</h2>
+  <p class="section-meta">Week 7 · Three key structures: stem-changing verbs, irregular YO, and porque/para/por</p>
+
+  <!-- GRAMMAR BOX 1 — e → ie stem-changing verbs -->
+  <div class="grammar-box">
+    <div class="grammar-header">
+      <div class="grammar-icon">G1</div>
+      <div>
+        <h3>Verbos con cambio e → ie · Stem-Changing Verbs</h3>
+        <p style="font-size:0.75rem;opacity:0.7;margin-top:2px;font-family:'Space Mono',monospace">stem-vowel e becomes ie in all forms except nosotros — the "boot" pattern</p>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <p>In these verbs, the stem vowel <strong>e</strong> changes to <strong>ie</strong> in <strong>all forms except <em>nosotros</em></strong>. The endings are completely regular — only the stem changes.</p>
+
+      <table class="pronoun-table">
+        <thead>
+          <tr>
+            <th>Pronoun</th>
+            <th><strong>querer</strong> (to want)</th>
+            <th><strong>entender</strong> (to understand)</th>
+            <th><strong>preferir</strong> (to prefer)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="connector-chip">yo</span></td>
+            <td class="sp">qu<span class="stem-change">ie</span>ro</td>
+            <td class="sp">ent<span class="stem-change">ie</span>ndo</td>
+            <td class="sp">pref<span class="stem-change">ie</span>ro</td>
+          </tr>
+          <tr>
+            <td><span class="connector-chip">tú</span></td>
+            <td class="sp">qu<span class="stem-change">ie</span>res</td>
+            <td class="sp">ent<span class="stem-change">ie</span>ndes</td>
+            <td class="sp">pref<span class="stem-change">ie</span>res</td>
+          </tr>
+          <tr>
+            <td><span class="connector-chip">él/ella/Ud.</span></td>
+            <td class="sp">qu<span class="stem-change">ie</span>re</td>
+            <td class="sp">ent<span class="stem-change">ie</span>nde</td>
+            <td class="sp">pref<span class="stem-change">ie</span>re</td>
+          </tr>
+          <tr class="highlight">
+            <td><span class="connector-chip" style="background:var(--gold);color:var(--navy)">nosotros ✓</span></td>
+            <td class="sp">queremos</td>
+            <td class="sp">entendemos</td>
+            <td class="sp">preferimos</td>
+          </tr>
+          <tr>
+            <td><span class="connector-chip">ellos/Uds.</span></td>
+            <td class="sp">qu<span class="stem-change">ie</span>ren</td>
+            <td class="sp">ent<span class="stem-change">ie</span>nden</td>
+            <td class="sp">pref<span class="stem-change">ie</span>ren</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>The "boot" visual:</strong> if you draw a boot shape around the changed forms, <em>nosotros</em> is the only one that sits outside the boot — and it's the only one that doesn't change.</p>
+
+      <div class="boot-wrap">
+        <div>
+          <div class="boot">
+            <div class="boot-cell">yo<br>qu<span class="stem-change">ie</span>ro</div>
+            <div class="boot-cell outside">nosotros<br>queremos</div>
+            <div class="boot-cell">tú<br>qu<span class="stem-change">ie</span>res</div>
+            <div class="boot-cell outside">—</div>
+            <div class="boot-cell">él/ella<br>qu<span class="stem-change">ie</span>re</div>
+            <div class="boot-cell">ellos<br>qu<span class="stem-change">ie</span>ren</div>
+          </div>
+          <div class="boot-caption">inside the boot = stem changes · nosotros stays regular</div>
+        </div>
+      </div>
+
+      <!-- ¡OJO! querer + infinitive -->
+      <div class="example-block" style="background:#fdf3f1;border-left:4px solid var(--terracotta);margin-top:14px">
+        <p class="label" style="color:var(--terracotta)">¡OJO! · Querer + infinitive</p>
+        <p class="es"><strong>QUERER + infinitive</strong> = desire / future plan. This construction is essential for expressing goals — you will use it every week.</p>
+        <p class="es" style="margin-top:6px">Quiero <em>estudiar</em> en México. <span class="en">→ I want to study in Mexico.</span></p>
+        <p class="es">Queremos <em>aprender</em> chino. <span class="en">→ We want to learn Chinese.</span></p>
+      </div>
+
+      <div class="example-block">
+        <p class="label">Other common e → ie verbs</p>
+        <p class="es"><strong>empezar</strong> (to begin) · <strong>pensar</strong> (to think) · <strong>cerrar</strong> (to close) · <strong>venir</strong> (to come) · <strong>sentir</strong> (to feel)</p>
+        <p class="es" style="margin-top:6px">All follow the boot pattern. Remember: <em>nosotros</em> never changes — <em>empezamos, pensamos, cerramos, venimos, sentimos</em>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR BOX 2 — Irregular YO -->
+  <div class="grammar-box">
+    <div class="grammar-header">
+      <div class="grammar-icon">G2</div>
+      <div>
+        <h3>Formas irregulares de YO · Only the yo form is irregular!</h3>
+        <p style="font-size:0.75rem;opacity:0.7;margin-top:2px;font-family:'Space Mono',monospace">eight common verbs · the yo form breaks the pattern · every other form is regular</p>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <p>For these verbs, <strong>only the <em>yo</em> form is irregular</strong>. Every other form (tú, él, nosotros, ellos) is conjugated normally.</p>
+
+      <table class="pronoun-table">
+        <thead>
+          <tr>
+            <th>Infinitive</th>
+            <th>YO form</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sp">hacer <span class="en">(to do/make)</span></td>
+            <td class="sp"><span class="stem-change">hago</span></td>
+            <td class="sp">Yo <em>hago</em> ejercicio cada mañana.</td>
+          </tr>
+          <tr>
+            <td class="sp">saber <span class="en">(to know facts)</span></td>
+            <td class="sp"><span class="stem-change">sé</span></td>
+            <td class="sp">Yo <em>sé</em> la respuesta correcta.</td>
+          </tr>
+          <tr>
+            <td class="sp">conocer <span class="en">(to know people/places)</span></td>
+            <td class="sp"><span class="stem-change">conozco</span></td>
+            <td class="sp">Yo <em>conozco</em> Madrid bien.</td>
+          </tr>
+          <tr>
+            <td class="sp">poner <span class="en">(to put/place)</span></td>
+            <td class="sp"><span class="stem-change">pongo</span></td>
+            <td class="sp"><em>Pongo</em> los libros en la mochila.</td>
+          </tr>
+          <tr>
+            <td class="sp">salir <span class="en">(to go out/leave)</span></td>
+            <td class="sp"><span class="stem-change">salgo</span></td>
+            <td class="sp"><em>Salgo</em> con amigos los viernes.</td>
+          </tr>
+          <tr>
+            <td class="sp">traer <span class="en">(to bring)</span></td>
+            <td class="sp"><span class="stem-change">traigo</span></td>
+            <td class="sp"><em>Traigo</em> mi laptop a clase siempre.</td>
+          </tr>
+          <tr>
+            <td class="sp">decir <span class="en">(to say)</span></td>
+            <td class="sp"><span class="stem-change">digo</span></td>
+            <td class="sp"><em>Digo</em> la verdad.</td>
+          </tr>
+          <tr>
+            <td class="sp">venir <span class="en">(to come)</span></td>
+            <td class="sp"><span class="stem-change">vengo</span></td>
+            <td class="sp"><em>Vengo</em> de una familia bilingüe.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Saber vs Conocer recap (Week 6 reactivation) -->
+      <div class="example-block">
+        <p class="label">Saber vs. Conocer — quick recap (from Week 6)</p>
+        <p class="es"><strong>Saber</strong> = facts, information, how to do something <span class="en">→ Sé hablar francés. / Sé dónde está.</span></p>
+        <p class="es"><strong>Conocer</strong> = people, places, familiarity <span class="en">→ Conozco a tu hermano. / Conozco Buenos Aires.</span></p>
+      </div>
+
+      <!-- Venir warning -->
+      <div class="example-block" style="background:#fdf3f1;border-left:4px solid var(--wrong);margin-top:14px">
+        <p class="label" style="color:var(--wrong)">⚠ Pitfall · Venir is "double trouble"</p>
+        <p class="es"><strong>Venir</strong> is BOTH an <em>e → ie</em> stem-changer AND has an irregular yo form.</p>
+        <p class="es" style="margin-top:6px"><em>vengo</em> · <em>v<span class="stem-change">ie</span>nes</em> · <em>v<span class="stem-change">ie</span>ne</em> · <em>venimos</em> · <em>v<span class="stem-change">ie</span>nen</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR BOX 3 — porque / para / por -->
+  <div class="grammar-box">
+    <div class="grammar-header">
+      <div class="grammar-icon">G3</div>
+      <div>
+        <h3>Porque · Para · Por · Three Confusing Words</h3>
+        <p style="font-size:0.75rem;opacity:0.7;margin-top:2px;font-family:'Space Mono',monospace">because — in order to — because of / for / in exchange</p>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <p>English uses "for" and "because" loosely. Spanish keeps them apart — and choosing the right one is the difference between a clear sentence and a confusing one.</p>
+
+      <div class="three-way">
+        <div class="way-card alt-1">
+          <div class="way-word">porque</div>
+          <div class="way-rule">because — gives a reason · + conjugated verb</div>
+          <div class="way-ex">Estudio <strong>porque</strong> me gusta.</div>
+          <div class="way-ex">No fui <strong>porque</strong> estaba enfermo.</div>
+        </div>
+        <div class="way-card alt-2">
+          <div class="way-word">para</div>
+          <div class="way-rule">in order to — purpose · + infinitive</div>
+          <div class="way-ex">Estudio <strong>para</strong> aprender.</div>
+          <div class="way-ex">Necesito un diccionario <strong>para</strong> la clase.</div>
+        </div>
+        <div class="way-card alt-3">
+          <div class="way-word">por</div>
+          <div class="way-rule">because of / for / in exchange · + noun</div>
+          <div class="way-ex">Lo hago <strong>por</strong> ti.</div>
+          <div class="way-ex">Gracias <strong>por</strong> todo.</div>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <p class="label">Quick tests · Pruebas rápidas</p>
+        <p class="es"><strong>¿Por qué?</strong> = Why? → answered with <strong>Porque</strong> = Because (one word, no space).</p>
+        <p class="es"><strong>Para + infinitive</strong> = in order to. If you can say "in order to" in English, use <em>para</em>.</p>
+        <p class="es"><strong>Por + noun</strong> = because of / for / in exchange for. Used for thanks (<em>gracias por</em>), travel through, time periods, and exchanges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ EJERCICIOS -->
+<section id="ejercicios">
+  <h2 class="section-title">Ejercicios — Practice Exercises</h2>
+  <p class="section-meta">4 exercises · Interactive · Type your answers and click Check</p>
+
+  <!-- EJERCICIO 4A — Querer conjugation table -->
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <h3>Ejercicio 4A — Tabla · Conjugate QUERER</h3>
+      <span class="ex-num">EJ. 4A</span>
+    </div>
+    <div class="exercise-body">
+      <p class="instructions">Complete the present-tense conjugation table for <em>querer</em>. Remember the e → ie change — and that <em>nosotros</em> stays regular. / Completa la tabla del verbo <em>querer</em>.</p>
+
+      <div class="conj-section">
+        <div class="conj-verb-header">
+          <span>QUERER — e → ie</span>
+          <span style="opacity:0.7">presente · present</span>
+        </div>
+        <div class="conj-grid">
+          <div class="conj-row">
+            <span class="conj-pronoun">yo</span>
+            <input class="conj-input" id="ej4a_0" type="text" placeholder="___" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="conj-row given">
+            <span class="conj-pronoun">nosotros ✓</span>
+            <span class="conj-preset">queremos</span>
+          </div>
+          <div class="conj-row">
+            <span class="conj-pronoun">tú</span>
+            <input class="conj-input" id="ej4a_1" type="text" placeholder="___" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="conj-row">
+            <span class="conj-pronoun">ellos</span>
+            <input class="conj-input" id="ej4a_2" type="text" placeholder="___" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="conj-row">
+            <span class="conj-pronoun">él/ella</span>
+            <input class="conj-input" id="ej4a_3" type="text" placeholder="___" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="conj-row" style="background:transparent"></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkEj4a()">Check Answers</button>
+        <button class="btn btn-reset" onclick="resetEj4a()">Reset</button>
+        <span class="score-badge" id="score4a"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 4B — e → ie fill-in -->
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <h3>Ejercicio 4B — e → ie en contexto · Stem-Changing Verbs</h3>
+      <span class="ex-num">EJ. 4B</span>
+    </div>
+    <div class="exercise-body">
+      <p class="instructions">Fill in with the correct present-tense form of the verb in parentheses. Watch for the e → ie change. / Completa con la forma correcta del verbo entre paréntesis.</p>
+      <div id="ej4b"></div>
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkEj4b()">Check Answers</button>
+        <button class="btn btn-reset" onclick="resetEj4b()">Reset</button>
+        <span class="score-badge" id="score4b"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 5 — Irregular YO -->
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <h3>Ejercicio 5 — Yo Irregular · Complete the Sentence</h3>
+      <span class="ex-num">EJ. 5</span>
+    </div>
+    <div class="exercise-body">
+      <p class="instructions">Write the correct YO form. Use the word bank to choose the right verb for each sentence. / Escribe la forma de yo. Usa el banco de palabras.</p>
+      <div class="word-bank">
+        <span class="word-bank-label">Banco de palabras · Word Bank</span>
+        <span class="word-chip">hago</span>
+        <span class="word-chip">sé</span>
+        <span class="word-chip">conozco</span>
+        <span class="word-chip">pongo</span>
+        <span class="word-chip">salgo</span>
+        <span class="word-chip">traigo</span>
+        <span class="word-chip">digo</span>
+        <span class="word-chip">vengo</span>
+      </div>
+      <div id="ej5"></div>
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkEj5()">Check Answers</button>
+        <button class="btn btn-reset" onclick="resetEj5()">Reset</button>
+        <span class="score-badge" id="score5"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 6 — porque / para / por -->
+  <div class="exercise-card">
+    <div class="exercise-header">
+      <h3>Ejercicio 6 — Porque / Para / Por · Choose the Right Word</h3>
+      <span class="ex-num">EJ. 6</span>
+    </div>
+    <div class="exercise-body">
+      <p class="instructions">Fill in with <em>porque</em>, <em>para</em>, or <em>por</em>. Read the whole sentence to decide which one fits. / Completa con <em>porque</em>, <em>para</em> o <em>por</em>.</p>
+      <div class="word-bank">
+        <span class="word-bank-label">Options · Opciones</span>
+        <span class="word-chip">porque</span>
+        <span class="word-chip">para</span>
+        <span class="word-chip">por</span>
+      </div>
+      <div id="ej6"></div>
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkEj6()">Check Answers</button>
+        <button class="btn btn-reset" onclick="resetEj6()">Reset</button>
+        <span class="score-badge" id="score6"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CULTURA -->
+<section id="cultura">
+  <h2 class="section-title">Cultura — Paraguay y el guaraní</h2>
+  <p class="section-meta">Latin America's officially bilingual country · the first academy of an indigenous language in the Americas</p>
+
+  <div class="cultural-card">
+    <div class="cultural-header">
+      <h3>🌿 Paraguay · A Nation That Speaks Two Languages</h3>
+    </div>
+    <div class="cultural-body" style="grid-template-columns:1fr">
+      <div class="fact-card" style="background:linear-gradient(135deg, var(--cream), var(--cream-dark));">
+        <p style="font-size:0.95rem;line-height:1.65;">Paraguay is the <strong>only officially bilingual country in Latin America</strong> where the indigenous language is spoken by the majority of the population. Over <strong>85% of Paraguayans</strong> speak <em>guaraní</em> — far more than the global average for indigenous languages — and many use it daily alongside Spanish. In <strong>2011</strong>, Paraguay established the <strong>Academia de la Lengua Guaraní</strong>, the <strong>first such institution for an indigenous language in the Americas</strong>.</p>
+      </div>
+    </div>
+    <div class="cultural-body">
+      <div class="fact-card">
+        <div class="fact-icon">🗣️</div>
+        <h4>El idioma · The language</h4>
+        <p>Guaraní is part of the Tupí-Guaraní family and was spoken across much of South America long before Spanish arrived. Today it shares official status with Spanish in Paraguay's constitution — children grow up bilingual from birth.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">📜</div>
+        <h4>Una academia oficial</h4>
+        <p>The Academia de la Lengua Guaraní (2011) was a landmark — for the first time in the Americas, an indigenous language received the same kind of formal academy that Spanish, French, and Italian have. It regulates spelling, vocabulary, and use in schools and government.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🌐</div>
+        <h4>Palabras prestadas · Borrowed words</h4>
+        <p>Spanish has borrowed many words from guaraní, including <em>jaguar</em>, <em>mandioca</em> (yuca / cassava), <em>piraña</em>, <em>tapioca</em>, and <em>tucán</em>. You probably already speak a little guaraní without realizing it.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">💬</div>
+        <h4>Jopará · Spanish + guaraní mix</h4>
+        <p>Everyday Paraguayan speech often blends both languages — a phenomenon called <em>jopará</em>. A speaker may switch between Spanish and guaraní mid-sentence, depending on context, audience, and topic.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Oral activity: ¡Entrevista de clase! -->
+  <div class="grammar-box">
+    <div class="grammar-header">
+      <div class="grammar-icon" style="background:var(--sage)">💬</div>
+      <div>
+        <h3>¡Entrevista de clase! · Oral Activity</h3>
+        <p style="font-size:0.75rem;opacity:0.7;margin-top:2px;font-family:'Space Mono',monospace">Wednesday 0:10–0:30 · Interview 3 classmates, take notes, share results</p>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <p>What do we want in Spanish class? Interview 3 classmates using the questions below. Take notes in Spanish, then share results with the class.</p>
+
+      <div class="example-block">
+        <p class="label">Questions to ask · Preguntas</p>
+        <p class="es">¿Qué quieres hacer en la clase este semestre?</p>
+        <p class="es">¿Prefieres trabajar solo/a o en grupo?</p>
+        <p class="es">¿Qué actividades te gustan más?</p>
+        <p class="es">¿Qué quieres aprender?</p>
+        <p class="es">¿Por qué estudias español?</p>
+      </div>
+
+      <div class="example-block">
+        <p class="label">Note each answer · Apuntes</p>
+        <p class="es"><strong>Nombre:</strong> ___ · <strong>Quiere:</strong> ___ · <strong>Prefiere:</strong> ___ · <strong>Le gusta(n):</strong> ___ · <strong>Estudia español porque/para:</strong> ___</p>
+      </div>
+
+      <div class="example-block">
+        <p class="label">After 3 interviews · Three-sentence summary</p>
+        <p class="es">"En nuestra clase, <strong>queremos</strong>… También <strong>preferimos</strong>… <strong>Estudiamos español porque/para</strong>…"</p>
+        <p class="es" style="font-size:0.82rem;color:var(--text-light);font-style:italic;margin-top:6px">Use <em>también</em>, <em>pero</em>, and <em>por eso</em> at least once each when you share with the class.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ VIDEO LOG -->
+<section id="videolog">
+  <h2 class="section-title">Video Log 3 — Solicitud de empleo o programa</h2>
+  <p class="section-meta">2–3 minutes · formal application to a hiring manager or program coordinator</p>
+
+  <!-- Description card -->
+  <div style="background:linear-gradient(135deg, var(--navy), var(--navy-light));color:white;padding:24px 28px;border-radius:14px;margin-bottom:28px;box-shadow:var(--tile-shadow)">
+    <div style="font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;margin-bottom:8px">Final del Capítulo 3</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:10px;color:white">Apply to a Job, Internship, or Community Program</h2>
+    <p style="font-size:0.95rem;line-height:1.55;opacity:0.95">You are applying to a job, internship, or community program where Spanish is useful. Record a <strong>2–3 minute video log in Spanish</strong> addressed to the hiring manager or program coordinator. Speak naturally — it's okay to use notes, but don't read word-for-word.</p>
+  </div>
+
+  <!-- Checklist -->
+  <h2 class="section-title">Checklist de gramática</h2>
+  <p class="section-meta">Tap each requirement as you complete your script · <span id="vl-counter">0 / 7</span> completed</p>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="vl-progress" style="width:0%"></div>
+  </div>
+
+  <div id="vl-checklist" style="margin-bottom:32px;margin-top:12px">
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>2–3 minutes of speaking, directly to camera</label>
+      <span class="vl-tag">format</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>≥ 1 stem-changing verb (e → ie)</label>
+      <span class="vl-tag">G1</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>≥ 1 irregular YO form (hago / sé / conozco / pongo …)</label>
+      <span class="vl-tag">G2</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>≥ 1 possessive (mi, mis, nuestro/a)</label>
+      <span class="vl-tag">cap. 3.1</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>Both <em>porque</em> AND <em>para</em> used at least once</label>
+      <span class="vl-tag">G3</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>Use <em>querer + infinitive</em> to state your goal</label>
+      <span class="vl-tag">querer</span>
+    </div>
+    <div class="checklist-item" onclick="toggleCheck(this)">
+      <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+      <label>Formal closing: "Quedo a su disposición. Muchas gracias por su tiempo."</label>
+      <span class="vl-tag">cierre</span>
+    </div>
+  </div>
+
+  <!-- Recording guide -->
+  <h2 class="section-title">Guía de grabación · Recording Guide</h2>
+  <p class="section-meta">Five segments · use notes, but speak naturally</p>
+
+  <div style="margin-bottom:32px">
+    <div class="vl-step">
+      <div class="vl-step-num">1</div>
+      <div class="vl-step-body">
+        <h4>Opening — formal introduction</h4>
+        <p>State your <em>name</em>, where you are <em>studying</em>, and which <em>position or program</em> you are applying for. Use formal register from the start.</p>
+        <div class="vl-step-tags">
+          <span class="connector-chip">formal</span>
+          <span class="connector-chip">register</span>
+        </div>
+      </div>
+    </div>
+    <div class="vl-step">
+      <div class="vl-step-num">2</div>
+      <div class="vl-step-body">
+        <h4>Who you are</h4>
+        <p>Name, current school or job, Spanish level. Use: <em>soy, estudio, sé, conozco</em>. Speak confidently and look at the camera.</p>
+        <div class="vl-step-tags">
+          <span class="connector-chip">soy / estudio</span>
+          <span class="connector-chip">sé · conozco</span>
+        </div>
+      </div>
+    </div>
+    <div class="vl-step">
+      <div class="vl-step-num">3</div>
+      <div class="vl-step-body">
+        <h4>Why this program / position</h4>
+        <p>Use <em>porque</em> and <em>para</em> to explain your motivation and what you want to learn or do. This is where porque/para/por earns its keep.</p>
+        <div class="vl-step-tags">
+          <span class="connector-chip">porque</span>
+          <span class="connector-chip">para + inf</span>
+          <span class="connector-chip">G3</span>
+        </div>
+      </div>
+    </div>
+    <div class="vl-step">
+      <div class="vl-step-num">4</div>
+      <div class="vl-step-body">
+        <h4>What you offer</h4>
+        <p>Use <em>querer + infinitive</em>, at least two irregular YO forms, and possessives. Be specific about skills and experience.</p>
+        <div class="vl-step-tags">
+          <span class="connector-chip">querer + inf</span>
+          <span class="connector-chip">≥ 2 yo irregular</span>
+          <span class="connector-chip">possessives</span>
+        </div>
+      </div>
+    </div>
+    <div class="vl-step">
+      <div class="vl-step-num">5</div>
+      <div class="vl-step-body">
+        <h4>Closing</h4>
+        <p>Thank the viewer and state your availability. End with: <em>"Quedo a su disposición. Muchas gracias por su tiempo."</em></p>
+        <div class="vl-step-tags">
+          <span class="connector-chip">cierre formal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script draft -->
+  <h2 class="section-title">Script Draft · Escribe tu guión</h2>
+  <p class="section-meta">Write before recording · aim for 200–300 words (~2–3 min) · <span id="word-count">0 words</span></p>
+
+  <textarea class="script-area" id="script" placeholder="Estimado/a coordinador/a:
+
+Mi nombre es ___ y estudio en ___. Quiero solicitar el programa de ___ porque ___ y para ___.
+
+Yo sé ___ y conozco ___. Hago ___ todos los días, y traigo ___ a mis clases.
+
+Quiero aprender ___. Mi meta es ___.
+
+Quedo a su disposición. Muchas gracias por su tiempo."></textarea>
+
+  <p style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--text-light);letter-spacing:0.05em;margin-top:12px">📁 File name when uploading: <strong>VideoLog3_[YourName]</strong></p>
+
+  <!-- Peer review -->
+  <h2 class="section-title" style="margin-top:32px">Peer Review · Partner Checklist</h2>
+  <p class="section-meta">Watch your partner's draft · 2 compliments + 1 suggestion</p>
+
+  <div style="background:white;border-radius:12px;box-shadow:var(--tile-shadow);padding:24px;margin-bottom:24px">
+    <p style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--correct);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">✨ Compliments (2)</p>
+    <textarea class="script-area" style="min-height:80px" placeholder="1. Me gusta cómo usaste…
+2. Tu pronunciación de ___ fue excelente porque…"></textarea>
+    <p style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin:18px 0 8px">💡 Suggestion (1)</p>
+    <textarea class="script-area" style="min-height:60px" placeholder="Para mejorar, puedes…"></textarea>
+  </div>
+</section>
+
+
+</main>
+
+<script>
+// ── NAVIGATION ─────────────────────────────────────
+function showSection(id, btn) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── UTILITY ────────────────────────────────────────
+function normalize(s) {
+  return (s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function showScore(id, correct, total) {
+  const el = document.getElementById(id);
+  el.textContent = `${correct} / ${total}`;
+  const pct = correct / total;
+  el.className = 'score-badge show ' + (pct >= 0.85 ? 'good' : pct >= 0.6 ? 'ok' : 'retry');
+}
+
+// ── GENERIC FILL-IN-WITH-HINT BUILDER ──────────────
+// Each item: { before, verb (hint chip), after, accepted: [...] }
+function buildFillExercise(data, key, containerId) {
+  const container = document.getElementById(containerId);
+  data.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'exercise-item';
+    const hintChip = item.verb
+      ? `<span style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--text-light);background:var(--cream-dark);padding:2px 6px;border-radius:3px">${item.verb}</span>`
+      : '';
+    div.innerHTML = `
+      <span class="item-num">${i+1}.</span>
+      <div class="item-text">
+        <div class="fill-sentence">
+          ${item.before ? `<span>${item.before}</span>` : ''}
+          ${hintChip}
+          <input class="blank-input" id="e${key}_${i}" type="text" placeholder="___" autocomplete="off" spellcheck="false">
+          ${item.after ? `<span>${item.after}</span>` : ''}
+        </div>
+        <div class="feedback" id="fb${key}_${i}"></div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function checkFillExercise(data, key, scoreId, containerId) {
+  let correct = 0;
+  data.forEach((item, i) => {
+    const inp = document.getElementById(`e${key}_${i}`);
+    const fb = document.getElementById(`fb${key}_${i}`);
+    const ok = item.accepted.some(a => normalize(a) === normalize(inp.value));
+    inp.className = 'blank-input ' + (ok ? 'correct-input' : 'wrong-input');
+    document.querySelectorAll(`#${containerId} .exercise-item`)[i].className = 'exercise-item ' + (ok ? 'correct' : 'wrong');
+    fb.className = 'feedback show ' + (ok ? 'correct' : 'wrong');
+    fb.textContent = ok ? '✓ ¡Correcto!' : `✗ Answer: ${item.accepted[0]}`;
+    if (ok) correct++;
+  });
+  showScore(scoreId, correct, data.length);
+}
+
+function resetFillExercise(data, key, scoreId, containerId) {
+  data.forEach((_, i) => {
+    const inp = document.getElementById(`e${key}_${i}`);
+    inp.value = ''; inp.className = 'blank-input';
+    document.getElementById(`fb${key}_${i}`).className = 'feedback';
+    document.querySelectorAll(`#${containerId} .exercise-item`)[i].className = 'exercise-item';
+  });
+  document.getElementById(scoreId).className = 'score-badge';
+}
+
+// ── EJERCICIO 4A — Querer conjugation ──────────────
+// Inputs ordered: yo, tú, ellos, él/ella
+const ej4aAnswers = ['quiero', 'quieres', 'quieren', 'quiere'];
+function checkEj4a() {
+  let correct = 0;
+  ej4aAnswers.forEach((ans, i) => {
+    const inp = document.getElementById('ej4a_' + i);
+    const ok = normalize(inp.value) === normalize(ans);
+    inp.className = 'conj-input ' + (ok ? 'correct-input' : 'wrong-input');
+    if (!ok) inp.placeholder = ans;
+    if (ok) correct++;
+  });
+  showScore('score4a', correct, ej4aAnswers.length);
+}
+function resetEj4a() {
+  ej4aAnswers.forEach((_, i) => {
+    const inp = document.getElementById('ej4a_' + i);
+    inp.value = ''; inp.className = 'conj-input';
+    inp.placeholder = '___';
+  });
+  document.getElementById('score4a').className = 'score-badge';
+}
+
+// ── EJERCICIO 4B — e → ie verbs in context ─────────
+const ej4bData = [
+  { before: 'Yo',                          verb: '(querer)',    after: 'estudiar en Buenos Aires el verano próximo.',     accepted: ['quiero'] },
+  { before: '¿Tú',                         verb: '(preferir)',  after: 'las clases de mañana o las de tarde?',            accepted: ['prefieres'] },
+  { before: 'Ella no',                     verb: '(entender)',  after: 'el subjuntivo todavía.',                          accepted: ['entiende'] },
+  { before: 'Nosotros',                    verb: '(empezar)',   after: 'la clase a las 8:00.',                            accepted: ['empezamos'] },
+  { before: 'Los estudiantes',             verb: '(querer)',    after: 'más tiempo para el examen final.',                accepted: ['quieren'] },
+  { before: 'Yo',                          verb: '(preferir)',  after: 'la novela original, no la adaptación.',           accepted: ['prefiero'] },
+];
+buildFillExercise(ej4bData, '4b', 'ej4b');
+function checkEj4b() { checkFillExercise(ej4bData, '4b', 'score4b', 'ej4b'); }
+function resetEj4b() { resetFillExercise(ej4bData, '4b', 'score4b', 'ej4b'); }
+
+// ── EJERCICIO 5 — Irregular YO ─────────────────────
+const ej5Data = [
+  { before: 'Todos los días',              verb: '(yo)',  after: 'ejercicio en el gimnasio del campus.',          accepted: ['hago'] },
+  { before: '',                            verb: '(yo)',  after: 'hablar francés un poco.',                       accepted: ['sé', 'se'] },
+  { before: '',                            verb: '(yo)',  after: 'a la profesora de filosofía muy bien.',         accepted: ['conozco'] },
+  { before: '',                            verb: '(yo)',  after: 'mis libros en la mochila antes de cada clase.', accepted: ['pongo'] },
+  { before: 'Los fines de semana',         verb: '(yo)',  after: 'con mis amigos al centro.',                     accepted: ['salgo'] },
+  { before: 'Siempre',                     verb: '(yo)',  after: 'mi laptop a clase.',                            accepted: ['traigo'] },
+  { before: 'Nunca',                       verb: '(yo)',  after: 'mentiras a mis profesores.',                    accepted: ['digo'] },
+  { before: '',                            verb: '(yo)',  after: 'de una familia bilingüe — español e inglés.',   accepted: ['vengo'] },
+];
+buildFillExercise(ej5Data, '5', 'ej5');
+function checkEj5() { checkFillExercise(ej5Data, '5', 'score5', 'ej5'); }
+function resetEj5() { resetFillExercise(ej5Data, '5', 'score5', 'ej5'); }
+
+// ── EJERCICIO 6 — porque / para / por ──────────────
+const ej6Data = [
+  { before: 'Estudio español',             verb: 'porque/para/por',  after: 'quiero estudiar en Colombia.',                  accepted: ['porque'] },
+  { before: 'Necesito una beca',           verb: 'porque/para/por',  after: 'ir al extranjero.',                              accepted: ['para'] },
+  { before: 'Muchas gracias',              verb: 'porque/para/por',  after: 'tu ayuda con la tarea.',                         accepted: ['por'] },
+  { before: 'No voy a clase',              verb: 'porque/para/por',  after: 'estoy muy enfermo.',                             accepted: ['porque'] },
+  { before: 'Ella estudia',                verb: 'porque/para/por',  after: 'aprender, no solo por las notas.',               accepted: ['para'] },
+  { before: 'Viajamos a México',           verb: 'porque/para/por',  after: 'razones culturales y personales.',               accepted: ['por'] },
+  { before: 'Llamo a mis padres',          verb: 'porque/para/por',  after: 'saber cómo están.',                              accepted: ['para'] },
+  { before: 'Lo hago',                     verb: 'porque/para/por',  after: 'ti — tú me has ayudado mucho este semestre.',    accepted: ['por'] },
+];
+buildFillExercise(ej6Data, '6', 'ej6');
+function checkEj6() { checkFillExercise(ej6Data, '6', 'score6', 'ej6'); }
+function resetEj6() { resetFillExercise(ej6Data, '6', 'score6', 'ej6'); }
+
+// ── VIDEO LOG: checklist + word counter ────────────
+function toggleCheck(item) {
+  const checkbox = item.querySelector('input[type="checkbox"]');
+  checkbox.checked = !checkbox.checked;
+  item.classList.toggle('done', checkbox.checked);
+  updateVlProgress();
+}
+function updateVlProgress() {
+  const items = document.querySelectorAll('#vl-checklist .checklist-item');
+  const done = document.querySelectorAll('#vl-checklist .checklist-item.done').length;
+  const total = items.length;
+  document.getElementById('vl-counter').textContent = `${done} / ${total}`;
+  document.getElementById('vl-progress').style.width = (done / total * 100) + '%';
+}
+
+// Word counter for script
+const scriptEl = document.getElementById('script');
+if (scriptEl) {
+  scriptEl.addEventListener('input', () => {
+    const words = scriptEl.value.trim() ? scriptEl.value.trim().split(/\s+/).length : 0;
+    document.getElementById('word-count').textContent = `${words} word${words === 1 ? '' : 's'}`;
+  });
+}
+</script>
+
+</body>
+</html>
